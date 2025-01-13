@@ -30,7 +30,7 @@ const Navbar = () => {
   );
   return (
     <>
-      <div className="navbar text-white">
+      <div className="navbar container mx-auto h-24 text-white p-0">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -64,11 +64,11 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 gap-6">{navLinks}</ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn font-bold ">
-            Login <MdLogin />{" "}
-          </a>
-          
+        <div className="navbar-end gap-4">
+          <Link className="flex border-2  px-3 py-2 rounded-lg items-center gap-1 cursor-pointer hover:bg-white hover:text-black font-bold md:text-lg lg:text-xl">
+            Login <MdLogin  />
+          </Link>
+
           {/* Theme dark and light */}
 
           <label className="swap swap-rotate">
