@@ -65,7 +65,7 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 gap-6">{navLinks}</ul>
         </div>
         <div className="navbar-end gap-4">
-          <Link className="flex border-2  px-3 py-2 rounded-lg items-center gap-1 cursor-pointer hover:bg-white hover:text-black font-bold md:text-lg lg:text-xl">
+          <Link to="/login" className="flex border-2  px-3 py-2 rounded-lg items-center gap-1 cursor-pointer hover:bg-white hover:text-black font-bold md:text-lg lg:text-xl">
             Login <MdLogin  />
           </Link>
 
