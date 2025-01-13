@@ -1,8 +1,8 @@
-import React from 'react';
 
 const Home = () => {
     return (
-        <div className=''>
+        <div className='mt-32'>
+            This is homepage
         </div>
     );
 };

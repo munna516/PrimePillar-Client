@@ -4,12 +4,29 @@ import loginLottie from "../../assets/LottieFiles/LoginLottie.json";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import GoogleLogin from "../../Components/GoogleLogin/GoogleLogin";
-
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
+  const { userLogin, setUser } = useAuth();
   const navigate = useNavigate();
-
-   const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    userLogin(email, password)
+      .then((result) => {
+        setUser(result?.user);
+        toast.success("Login successfull");
+        navigate(location?.state ? location.state : "/");
+      })
+      .catch((error) =>
+        toast.error("Invalid email or password", {
+          position: "top-right",
+        })
+      );
+  };
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] mt-36 mb-14">
@@ -19,7 +36,6 @@ const Login = () => {
             Welcome back !
           </p>
 
-          {/* <GoogleLogin></GoogleLogin> */}
           <GoogleLogin></GoogleLogin>
 
           <div className="flex items-center justify-between mt-4">
@@ -31,7 +47,7 @@ const Login = () => {
 
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
           </div>
-          <form >
+          <form onSubmit={handleLogin}>
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 "

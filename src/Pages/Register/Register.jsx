@@ -4,11 +4,49 @@ import Lottie from "lottie-react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import GoogleLogin from "../../Components/GoogleLogin/GoogleLogin";
+import { imageUpload } from "../../Api/utils";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Register = () => {
-
+  const { user, setUser, createNewUser, updateUserProfile } = useAuth();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const name = form.name.value;
+    const password = form.password.value;
+    const image = form.image.files[0];
+    if (password.length < 6) {
+      setErrorMessage("password should be 6 characters");
+      return;
+    }
+    const regularExp = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{6,}$/;
+    if (!regularExp.test(password)) {
+      setErrorMessage("must have one uppercase, lowercase & digit");
+      return;
+    }
+    try {
+      const result = await createNewUser(email, password);
+      setUser(result?.user);
+      const photo = await imageUpload(image);
+      try {
+        await updateUserProfile({ displayName: name, photoURL: photo });
+        toast.success("Registration Successful");
+        navigate("/");
+      } catch (err) {
+        toast.error(err.code, " somthing went wrong");
+      }
+    } catch (error) {
+      toast.error("Email already used in another account", {
+        position: "top-right",
+      });
+    }
+  };
 
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] mt-36 mb-14 ">
@@ -29,13 +67,13 @@ const Register = () => {
 
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
           </div>
-          <form>
+          <form onSubmit={handleRegister}>
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 "
                 htmlFor="name"
               >
-                Username
+                Name
               </label>
               <input
                 id="name"
@@ -48,18 +86,17 @@ const Register = () => {
             </div>
             <div className="mt-4">
               <label
-                className="block mb-2 text-sm font-medium text-gray-600 "
-                htmlFor="photo"
+                htmlFor="image"
+                className="block mb-2 text-sm font-medium text-gray-600"
               >
-                Photo URL
+                Select Image
               </label>
               <input
-                id="photo"
-                autoComplete="photo"
                 required
-                name="photo"
-                className="block w-full px-4 py-2 text-gray-700  border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
-                type="text"
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
               />
             </div>
             <div className="mt-4">

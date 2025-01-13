@@ -1,8 +1,14 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdLogin } from "react-icons/md";
 import logo from "../../assets/Images/logo.png";
+import avatarImage from "../../assets/Images/avatar.jpg"
 import { useEffect, useState } from "react";
+import useAuth from "../../Hooks/useAuth";
+import { FiLogOut } from "react-icons/fi";
+import toast from "react-hot-toast";
 const Navbar = () => {
+  const { user, userLogOut } = useAuth();
+  const navigate = useNavigate();
   const [theme, setTheme] = useState(
     localStorage.getItem("theme") ? localStorage.getItem("theme") : "light"
   );
@@ -18,6 +24,21 @@ const Navbar = () => {
     const localTheme = localStorage.getItem("theme");
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
+
+  const handleLogOut = () => {
+    userLogOut()
+      .then(() => {
+        toast.success("Logout Successfull", {
+          position: "top-center",
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        toast.error(error.code);
+      });
+
+    navigate("/");
+  };
   const navLinks = (
     <>
       <NavLink to="/">
@@ -51,7 +72,7 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 gap-3 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-dark-blue gap-3 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {navLinks}
             </ul>
@@ -65,9 +86,55 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1 gap-6">{navLinks}</ul>
         </div>
         <div className="navbar-end gap-4">
-          <Link to="/login" className="flex border-2  px-3 py-2 rounded-lg items-center gap-1 cursor-pointer hover:bg-white hover:text-black font-bold md:text-lg lg:text-xl">
-            Login <MdLogin  />
-          </Link>
+          {user && user?.email ? (
+            <div className="flex justify-center items-center z-10 gap-3">
+              {/* image  */}
+              <div className="dropdown dropdown-end">
+                <div
+                  tabIndex={0}
+                  className="border-2 border-white rounded-full "
+                >
+                  <img
+                    className="w-12 rounded-full p-1"
+                    referrerPolicy="no-referrer"
+                    src={ user && user?.photoURL ? user.photoURL : avatarImage}
+                    alt=""
+                  />
+                </div>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content menu bg-dark-blue rounded-box z-[1] w-60 p-2 shadow"
+                >
+                  <li>
+                    <a className="flex justify-center rounded-lg  md:text-lg font-semibold ">
+                      {user?.displayName}
+                    </a>
+                  </li>
+                  <li>
+                    <a className="flex justify-center rounded-lg hover:bg-white hover:text-black md:text-lg font-semibold">
+                      Dashboard
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      onClick={handleLogOut}
+                      className="flex justify-center font-bold rounded-lg hover:bg-white hover:text-red-500 md:text-lg gap-2 "
+                    >
+                      Logout <FiLogOut />
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              {/* My Profile */}
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="flex border-2  px-3 py-2 rounded-lg items-center gap-1 cursor-pointer hover:bg-white hover:text-black font-bold md:text-lg lg:text-xl"
+            >
+              Login <MdLogin />
+            </Link>
+          )}
 
           {/* Theme dark and light */}
 
