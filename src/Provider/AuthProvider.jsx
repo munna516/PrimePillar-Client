@@ -8,9 +8,11 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
+  const axiosPublic = useAxiosPublic();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -46,12 +48,23 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      if (currentUser) {
+        const userInfo = { email: currentUser?.email };
+        axiosPublic.post("/jwt", userInfo).then((res) => {
+          if (res?.data?.token) {
+            localStorage.setItem("token", res.data.token);
+          }
+        });
+        setLoading(false);
+      } else {
+        localStorage.removeItem("token");
+        setLoading(false);
+      }
     });
     return () => {
       unsubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
   const authInfo = {
     user,
     setUser,
@@ -60,7 +73,7 @@ const AuthProvider = ({ children }) => {
     createNewUser,
     googleSignIn,
     userLogOut,
-    updateUserProfile
+    updateUserProfile,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

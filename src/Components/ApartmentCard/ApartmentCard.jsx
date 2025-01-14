@@ -1,8 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
-import axios from "axios";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 const ApartmentCard = ({ apartment }) => {
+  const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const navigate = useNavigate();
   const { apartmentImg, block, floor, rent, apartmentNum } = apartment || {};
@@ -19,19 +20,17 @@ const ApartmentCard = ({ apartment }) => {
       rent,
       status: "Pending",
     };
-    axios
-      .post(`${import.meta.env.VITE_API}/agreements`, agreementInfo)
-      .then((res) => {
-        if (res?.data?.insertedId) {
-          toast.success(
-            "Agreement is successful.Please wait for owner confirmation!!"
-          );
-        } else {
-          toast.error(res?.data?.message, {
-            position: "top-right",
-          });
-        }
-      });
+    axiosPublic.post(`/agreements`, agreementInfo).then((res) => {
+      if (res?.data?.insertedId) {
+        toast.success(
+          "Agreement is successful.Please wait for owner confirmation!!"
+        );
+      } else {
+        toast.error(res?.data?.message, {
+          position: "top-right",
+        });
+      }
+    });
   };
   return (
     <div className="card card-compact bg-base-100 border-2">

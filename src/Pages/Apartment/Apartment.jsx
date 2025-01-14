@@ -4,17 +4,20 @@ import { Helmet } from "react-helmet";
 import ApartmentCard from "../../Components/ApartmentCard/ApartmentCard";
 import Space from "../../Components/Space/Space";
 import { useState } from "react";
+import Loading from "../../Components/Shared/Loading";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const Apartment = () => {
+  const axiosPublic = useAxiosPublic();
+
   const { data: apartments = [], isLoading } = useQuery({
     queryKey: ["apartments"],
     queryFn: async () => {
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API}/apartments`
-      );
+      const { data } = await axiosPublic.get(`/apartments`);
       return data;
     },
   });
+
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 6;
 
@@ -22,7 +25,10 @@ const Apartment = () => {
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = apartments.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = (apartments || []).slice(
+    indexOfFirstCard,
+    indexOfLastCard
+  );
 
   const handleNext = () => {
     if (currentPage < totalPages) setCurrentPage((prev) => prev + 1);
@@ -30,7 +36,9 @@ const Apartment = () => {
   const handlePrevious = () => {
     if (currentPage > 1) setCurrentPage((prev) => prev - 1);
   };
-
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <>
       <Helmet>
@@ -57,7 +65,7 @@ const Apartment = () => {
           <button
             onClick={handlePrevious}
             disabled={currentPage === 1}
-            className={`p-4 bg-dark-blue text-white rounded-lg ${
+            className={`p-3 bg-dark-blue text-white rounded-lg ${
               currentPage === 1
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-gray-300"
@@ -73,7 +81,7 @@ const Apartment = () => {
           <button
             onClick={handleNext}
             disabled={currentPage === totalPages}
-            className={`p-4 bg-dark-blue text-white rounded-lg ${
+            className={`p-3 bg-dark-blue text-white rounded-lg ${
               currentPage === totalPages
                 ? "opacity-50 cursor-not-allowed"
                 : "hover:bg-gray-300"
