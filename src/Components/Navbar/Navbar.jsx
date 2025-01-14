@@ -1,7 +1,7 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { MdLogin } from "react-icons/md";
 import logo from "../../assets/Images/logo.png";
-import avatarImage from "../../assets/Images/avatar.jpg"
+import avatarImage from "../../assets/Images/avatar.jpg";
 import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { FiLogOut } from "react-icons/fi";
@@ -41,10 +41,18 @@ const Navbar = () => {
   };
   const navLinks = (
     <>
-      <NavLink to="/">
+      <NavLink  className={({ isActive }) =>
+                `button md:text-lg lg:text-xl ${
+                  isActive ? "text-dark-gray bg-white" : ""
+                }`
+              } to="/">
         <a>Home</a>
       </NavLink>
-      <NavLink to="/apartment">
+      <NavLink className={({ isActive }) =>
+                `button md:text-lg lg:text-xl ${
+                  isActive ? "text-dark-gray bg-white" : ""
+                }`
+              }  to="/apartment">
         <a>Apartment</a>
       </NavLink>
     </>
@@ -78,8 +86,10 @@ const Navbar = () => {
             </ul>
           </div>
           <Link to="/" className="flex items-center gap-2">
-            <img className="w-12" src={logo} alt="" />
-            <h1 className="text-4xl font-extrabold ">PrimePillar</h1>
+            <img className="w-8 md:w-10 lg:w-12" src={logo} alt="" />
+            <h1 className="text-xl md:text-2xl lg:text-4xl font-extrabold ">
+              PrimePillar
+            </h1>
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
@@ -97,7 +107,7 @@ const Navbar = () => {
                   <img
                     className="w-12 rounded-full p-1"
                     referrerPolicy="no-referrer"
-                    src={ user && user?.photoURL ? user.photoURL : avatarImage}
+                    src={user && user?.photoURL ? user.photoURL : avatarImage}
                     alt=""
                   />
                 </div>
@@ -111,7 +121,7 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="flex justify-center rounded-lg hover:bg-white hover:text-black md:text-lg font-semibold">
+                    <a className="flex justify-center rounded-lg hover:bg-white hover:text-dark-gray md:text-lg font-semibold">
                       Dashboard
                     </a>
                   </li>
@@ -128,12 +138,16 @@ const Navbar = () => {
               {/* My Profile */}
             </div>
           ) : (
-            <Link
+            <NavLink
               to="/login"
-              className="flex border-2  px-3 py-2 rounded-lg items-center gap-1 cursor-pointer hover:bg-white hover:text-black font-bold md:text-lg lg:text-xl"
+              className={({ isActive }) =>
+                `button md:text-lg lg:text-xl ${
+                  isActive ? "text-dark-gray bg-white" : ""
+                }`
+              }
             >
               Login <MdLogin />
-            </Link>
+            </NavLink>
           )}
 
           {/* Theme dark and light */}
