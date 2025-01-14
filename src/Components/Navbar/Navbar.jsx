@@ -41,18 +41,24 @@ const Navbar = () => {
   };
   const navLinks = (
     <>
-      <NavLink  className={({ isActive }) =>
-                `button md:text-lg lg:text-xl ${
-                  isActive ? "text-dark-gray bg-white" : ""
-                }`
-              } to="/">
+      <NavLink
+        className={({ isActive }) =>
+          `button md:text-lg lg:text-xl ${
+            isActive ? "text-dark-gray bg-white" : ""
+          }`
+        }
+        to="/"
+      >
         <a>Home</a>
       </NavLink>
-      <NavLink className={({ isActive }) =>
-                `button md:text-lg lg:text-xl ${
-                  isActive ? "text-dark-gray bg-white" : ""
-                }`
-              }  to="/apartment">
+      <NavLink
+        className={({ isActive }) =>
+          `button md:text-lg lg:text-xl ${
+            isActive ? "text-dark-gray bg-white" : ""
+          }`
+        }
+        to="/apartment"
+      >
         <a>Apartment</a>
       </NavLink>
     </>
@@ -121,9 +127,12 @@ const Navbar = () => {
                     </a>
                   </li>
                   <li>
-                    <a className="flex justify-center rounded-lg hover:bg-white hover:text-dark-gray md:text-lg font-semibold">
+                    <Link
+                      to="dashboard"
+                      className="flex justify-center rounded-lg hover:bg-white hover:text-dark-gray md:text-lg font-semibold"
+                    >
                       Dashboard
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a
