@@ -1,7 +1,38 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import axios from "axios";
+import toast from "react-hot-toast";
 const ApartmentCard = ({ apartment }) => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const { apartmentImg, block, floor, rent, apartmentNum } = apartment || {};
+  const handleAgreement = () => {
+    if (!user && !user?.email) return navigate("/login");
+
+    const agreementInfo = {
+      name: user?.displayName,
+      email: user?.email,
+
+      floor,
+      block,
+      apartmentNum,
+      rent,
+      status: "Pending",
+    };
+    axios
+      .post(`${import.meta.env.VITE_API}/agreements`, agreementInfo)
+      .then((res) => {
+        if (res?.data?.insertedId) {
+          toast.success(
+            "Agreement is successful.Please wait for owner confirmation!!"
+          );
+        } else {
+          toast.error(res?.data?.message, {
+            position: "top-right",
+          });
+        }
+      });
+  };
   return (
     <div className="card card-compact bg-base-100 border-2">
       <figure className="p-2">
@@ -21,7 +52,10 @@ const ApartmentCard = ({ apartment }) => {
           Price : <span className="font-bold">${rent}</span>
         </h2>
         <div className="card-actions justify-end">
-          <Link className="p-4 border-2 font-semibold border-dark-blue bg-dark-blue rounded-lg hover:text-black hover:bg-white  text-white">
+          <Link
+            onClick={handleAgreement}
+            className="p-4 border-2 font-semibold border-dark-blue bg-dark-blue rounded-lg hover:text-black hover:bg-white  text-white"
+          >
             Agreement
           </Link>
         </div>
