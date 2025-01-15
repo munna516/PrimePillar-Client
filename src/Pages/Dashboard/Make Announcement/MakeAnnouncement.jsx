@@ -26,7 +26,7 @@ const MakeAnnouncement = () => {
   };
   return (
     <div>
-      <h1 className="text-center font-bold text-xl md:text-2xl lg:text-3xl">
+      <h1 className="text-center font-bold text-xl text-dark-blue md:text-2xl lg:text-3xl">
         Make An Announcement
       </h1>
       <Space></Space>

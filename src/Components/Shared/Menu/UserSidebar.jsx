@@ -7,7 +7,7 @@ const UserSidebar = () => {
       <NavLink
         to="/dashboard/announcements"
         className={({ isActive }) =>
-          `flex items-center py-2 px-3 space-x-4   border-2 rounded-lg ${
+          `flex items-center py-2 px-3 space-x-4 border-2 rounded-lg ${
             isActive ? "bg-white text-black" : ""
           }`
         }

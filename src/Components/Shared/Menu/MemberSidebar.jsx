@@ -26,6 +26,7 @@ const MemberSidebar = () => {
         <FaCreditCard />
         <span className="hidden md:inline">Make Payment</span>
       </NavLink>
+
       <NavLink
         to="/dashboard/payment-history"
         className={({ isActive }) =>

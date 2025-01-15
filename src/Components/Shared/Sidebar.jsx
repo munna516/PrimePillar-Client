@@ -11,7 +11,7 @@ const Sidebar = ({ role }) => {
       <h1 className="text-3xl font-bold hidden md:block mt-3 text-center">
         PrimePillar
       </h1>
-      <ul className="flex flex-col mt-10 md:mt-7 gap-3 text-xl">
+      <ul className="flex flex-col mt-10 md:mt-7 gap-3 text-lg">
         {role === "user" && <UserSidebar></UserSidebar>}
         {role === "member" && <MemberSidebar></MemberSidebar>}
         {role === "admin" && <AdminSidebar></AdminSidebar>}

@@ -8,13 +8,13 @@ const Dashboard = () => {
     <>
       <div className="flex">
         {/* Dashboard Sidebar */}
-        <div className=" bg-dark-blue min-h-screen w-20 md:w-72 border-r-2 border-gray-400">
+        <div className=" bg-dark-blue min-h-screen w-20 md:w-72 fixed border-r-2 border-gray-400">
           <Sidebar role={role}></Sidebar>
         </div>
-        <div className="grow bg-base-200">
+        <div className="grow bg-base-200 min-h-screen">
           <DashboardNav role={role}></DashboardNav>
           {/* Content */}
-          <div className="p-5 md:p-10">
+          <div className="ml-20 md:ml-72 p-5 md:p-10 ">
             <Outlet></Outlet>
           </div>
         </div>
