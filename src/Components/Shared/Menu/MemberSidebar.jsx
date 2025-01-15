@@ -2,18 +2,19 @@ import { NavLink } from "react-router-dom";
 import { FaBullhorn, FaUser } from "react-icons/fa";
 import { FaCreditCard, FaFileInvoiceDollar } from "react-icons/fa";
 const MemberSidebar = () => {
-    return  <>
-    <NavLink
-          to="/dashboard/my-profile"
-          className={({ isActive }) =>
-            `flex items-center py-2 px-3 space-x-4  border-2 rounded-lg ${
-              isActive ? "bg-white text-black" : ""
-            }`
-          }
-        >
+  return (
+    <>
+      <NavLink
+        to="/dashboard/my-profile"
+        className={({ isActive }) =>
+          `flex items-center py-2 px-3 space-x-4  border-2 rounded-lg ${
+            isActive ? "bg-white text-black" : ""
+          }`
+        }
+      >
         <FaUser />
-          <span className="hidden md:inline">My Profile</span>
-        </NavLink>
+        <span className="hidden md:inline">My Profile</span>
+      </NavLink>
       <NavLink
         to="/dashboard/make-payment"
         className={({ isActive }) =>
@@ -33,7 +34,7 @@ const MemberSidebar = () => {
           }`
         }
       >
-        <FaFileInvoiceDollar/>
+        <FaFileInvoiceDollar />
         <span className="hidden md:inline">Payment History</span>
       </NavLink>
       <NavLink
@@ -44,10 +45,11 @@ const MemberSidebar = () => {
           }`
         }
       >
-         <FaBullhorn  />
+        <FaBullhorn />
         <span className="hidden md:inline">Announcement</span>
       </NavLink>
     </>
+  );
 };
 
 export default MemberSidebar;

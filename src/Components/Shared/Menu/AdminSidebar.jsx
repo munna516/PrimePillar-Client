@@ -1,5 +1,11 @@
 import { NavLink } from "react-router-dom";
-import { FaBullhorn, FaFileContract, FaTags, FaUser, FaUserCog } from "react-icons/fa";
+import {
+  FaBullhorn,
+  FaFileContract,
+  FaTags,
+  FaUser,
+  FaUserCog,
+} from "react-icons/fa";
 
 const AdminSidebar = () => {
   return (
@@ -24,7 +30,7 @@ const AdminSidebar = () => {
           }`
         }
       >
-        <FaUserCog/>
+        <FaUserCog />
         <span className="hidden md:inline">Manage Members</span>
       </NavLink>
       <NavLink
@@ -35,7 +41,7 @@ const AdminSidebar = () => {
           }`
         }
       >
-        <FaFileContract/>
+        <FaFileContract />
         <span className="hidden md:inline">Agreement Requests</span>
       </NavLink>
       <NavLink
@@ -46,7 +52,7 @@ const AdminSidebar = () => {
           }`
         }
       >
-        <FaTags/>
+        <FaTags />
         <span className="hidden md:inline">Manage Coupons</span>
       </NavLink>
       <NavLink
@@ -57,7 +63,7 @@ const AdminSidebar = () => {
           }`
         }
       >
-        <FaBullhorn/>
+        <FaBullhorn />
         <span className="hidden md:inline">Make Announcement</span>
       </NavLink>
     </>

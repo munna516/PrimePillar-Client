@@ -5,15 +5,13 @@ import UserSidebar from "./Menu/UserSidebar";
 import MemberSidebar from "./Menu/MemberSidebar";
 import AdminSidebar from "./Menu/AdminSidebar";
 
-
-const Sidebar = () => {
-  const role = "admin";
+const Sidebar = ({ role }) => {
   return (
     <div className="bg-dark-blue text-white p-4">
-      <h1 className="text-3xl font-bold hidden md:block mt-4 text-center">
+      <h1 className="text-3xl font-bold hidden md:block mt-3 text-center">
         PrimePillar
       </h1>
-      <ul className="flex flex-col mt-5 gap-3 text-xl">
+      <ul className="flex flex-col mt-10 md:mt-7 gap-3 text-xl">
         {role === "user" && <UserSidebar></UserSidebar>}
         {role === "member" && <MemberSidebar></MemberSidebar>}
         {role === "admin" && <AdminSidebar></AdminSidebar>}
