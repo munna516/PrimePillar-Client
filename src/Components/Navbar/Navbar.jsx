@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import useAuth from "../../Hooks/useAuth";
 import { FiLogOut } from "react-icons/fi";
 import toast from "react-hot-toast";
+import useRole from "../../Hooks/useRole";
+import Loading from "../Shared/Loading";
 const Navbar = () => {
   const { user, userLogOut } = useAuth();
   const navigate = useNavigate();
@@ -39,6 +41,8 @@ const Navbar = () => {
 
     navigate("/");
   };
+  const [role, isLoading] = useRole();
+
   const navLinks = (
     <>
       <NavLink
@@ -128,7 +132,13 @@ const Navbar = () => {
                   </li>
                   <li>
                     <Link
-                      to="dashboard"
+                      to={`/dashboard/${
+                        role === "admin"
+                          ? "admin-profile"
+                          : role === "user"
+                          ? "my-profiles"
+                          : "my-profile"
+                      }`}
                       className="flex justify-center rounded-lg hover:bg-white hover:text-dark-gray md:text-lg font-semibold"
                     >
                       Dashboard

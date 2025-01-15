@@ -14,6 +14,7 @@ const useAxiosPrivate = () => {
   axiosPrivate.interceptors.request.use(
     function (config) {
       const token = localStorage.getItem("token");
+      // console.log(token)
       config.headers.authorization = `Bearer ${token}`;
       return config;
     },
@@ -30,8 +31,7 @@ const useAxiosPrivate = () => {
       const status = error?.response?.status;
       if (status === 401 || status === 403) {
         await userLogOut();
-        toast.error(error?.response?.data?.message);
-        navigate("/login");
+        navigate("/login", { replace: true });
       }
       return Promise.reject(error);
     }
