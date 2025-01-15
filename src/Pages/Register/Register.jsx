@@ -36,7 +36,10 @@ const Register = () => {
       setUser(result?.user);
       const photo = await imageUpload(image);
       try {
-        await updateUserProfile({ displayName: name, photoURL: photo });
+        await updateUserProfile({
+          displayName: name,
+          photoURL: photo,
+        });
         toast.success("Registration Successful");
         navigate("/");
       } catch (err) {

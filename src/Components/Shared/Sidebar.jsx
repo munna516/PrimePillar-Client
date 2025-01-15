@@ -7,7 +7,7 @@ import AdminSidebar from "./Menu/AdminSidebar";
 
 const Sidebar = ({ role }) => {
   return (
-    <div className="bg-dark-blue text-white p-4">
+    <div className="bg-dark-blue text-white p-3">
       <h1 className="text-3xl font-bold hidden md:block mt-3 text-center">
         PrimePillar
       </h1>

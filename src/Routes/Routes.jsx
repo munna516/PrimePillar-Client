@@ -14,8 +14,11 @@ import ManageMembers from "../Pages/Dashboard/Manage Members/ManageMembers";
 import AgreementReq from "../Pages/Dashboard/Agreement Requests/AgreementReq";
 import ManageCoupons from "../Pages/Dashboard/Manage Coupon/ManageCoupons";
 import MakeAnnouncement from "../Pages/Dashboard/Make Announcement/MakeAnnouncement";
-import MyProfile from "../Pages/Dashboard/My Profile/MyProfile";
 import AdminProfile from "../Pages/Dashboard/Admin Profile/AdminProfile";
+import AdminRoute from "./AdminRoute";
+import MemberRoute from "./MemberRoute";
+import UserProfile from "../Pages/Dashboard/User Profile/UserProfile";
+import MemberProfile from "../Pages/Dashboard/Member Profile/MemberProfile";
 
 export const router = createBrowserRouter([
   {
@@ -62,7 +65,9 @@ export const router = createBrowserRouter([
         path: "make-payment",
         element: (
           <PrivateRoutes>
-            <MakePayment></MakePayment>
+            <MemberRoute>
+              <MakePayment></MakePayment>
+            </MemberRoute>
           </PrivateRoutes>
         ),
       },
@@ -70,7 +75,9 @@ export const router = createBrowserRouter([
         path: "payment-history",
         element: (
           <PrivateRoutes>
-            <PaymentHistory></PaymentHistory>
+            <MemberRoute>
+              <PaymentHistory></PaymentHistory>
+            </MemberRoute>
           </PrivateRoutes>
         ),
       },
@@ -78,7 +85,9 @@ export const router = createBrowserRouter([
         path: "manage-members",
         element: (
           <PrivateRoutes>
-            <ManageMembers></ManageMembers>
+            <AdminRoute>
+              <ManageMembers></ManageMembers>
+            </AdminRoute>
           </PrivateRoutes>
         ),
       },
@@ -86,7 +95,9 @@ export const router = createBrowserRouter([
         path: "agreement-requests",
         element: (
           <PrivateRoutes>
-            <AgreementReq></AgreementReq>
+            <AdminRoute>
+              <AgreementReq></AgreementReq>
+            </AdminRoute>
           </PrivateRoutes>
         ),
       },
@@ -94,7 +105,9 @@ export const router = createBrowserRouter([
         path: "manage-coupons",
         element: (
           <PrivateRoutes>
-            <ManageCoupons></ManageCoupons>
+            <AdminRoute>
+              <ManageCoupons></ManageCoupons>
+            </AdminRoute>
           </PrivateRoutes>
         ),
       },
@@ -102,7 +115,9 @@ export const router = createBrowserRouter([
         path: "make-announcement",
         element: (
           <PrivateRoutes>
-            <MakeAnnouncement></MakeAnnouncement>
+            <AdminRoute>
+              <MakeAnnouncement></MakeAnnouncement>
+            </AdminRoute>
           </PrivateRoutes>
         ),
       },
@@ -110,7 +125,9 @@ export const router = createBrowserRouter([
         path: "my-profile",
         element: (
           <PrivateRoutes>
-            <MyProfile></MyProfile>
+            <MemberRoute>
+              <MemberProfile></MemberProfile>
+            </MemberRoute>
           </PrivateRoutes>
         ),
       },
@@ -118,7 +135,17 @@ export const router = createBrowserRouter([
         path: "admin-profile",
         element: (
           <PrivateRoutes>
-            <AdminProfile></AdminProfile>
+            <AdminRoute>
+              <AdminProfile></AdminProfile>
+            </AdminRoute>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "my-profiles",
+        element: (
+          <PrivateRoutes>
+            <UserProfile></UserProfile>
           </PrivateRoutes>
         ),
       },

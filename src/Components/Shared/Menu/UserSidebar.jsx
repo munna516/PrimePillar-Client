@@ -5,6 +5,17 @@ const UserSidebar = () => {
   return (
     <>
       <NavLink
+        to="/dashboard/my-profiles"
+        className={({ isActive }) =>
+          `flex items-center py-2 px-3 space-x-4  border-2 rounded-lg ${
+            isActive ? "bg-white text-black" : ""
+          }`
+        }
+      >
+        <FaUser />
+        <span className="hidden md:inline">My Profile</span>
+      </NavLink>
+      <NavLink
         to="/dashboard/announcements"
         className={({ isActive }) =>
           `flex items-center py-2 px-3 space-x-4 border-2 rounded-lg ${
@@ -12,20 +23,9 @@ const UserSidebar = () => {
           }`
         }
       >
-        <FaBullhorn  />
+        <FaBullhorn />
 
         <span className="hidden md:inline">Announcement</span>
-      </NavLink>
-      <NavLink
-        to="/dashboard/my-profile"
-        className={({ isActive }) =>
-          `flex items-center py-2 px-3 space-x-4  border-2 rounded-lg ${
-            isActive ? "bg-white text-black" : ""
-          }`
-        }
-      >
-      <FaUser />
-        <span className="hidden md:inline">My Profile</span>
       </NavLink>
     </>
   );

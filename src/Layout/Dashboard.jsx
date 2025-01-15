@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Components/Shared/Sidebar";
 import DashboardNav from "../Components/Shared/DashboardNav";
+import useRole from "../Hooks/useRole";
 
 const Dashboard = () => {
-  const role = "admin";
+  const [role] = useRole();
+
   return (
     <>
       <div className="flex">

@@ -36,6 +36,7 @@ const AuthProvider = ({ children }) => {
 
   //   Update User Profile
   const updateUserProfile = (updatedData) => {
+    setLoading(true);
     return updateProfile(auth.currentUser, updatedData);
   };
 
@@ -48,6 +49,10 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      const usersInfo = {
+        email: currentUser?.email,
+      };
+      axiosPublic.post("/users", usersInfo).then((res) => {});
       if (currentUser) {
         const userInfo = { email: currentUser?.email };
         axiosPublic.post("/jwt", userInfo).then((res) => {
