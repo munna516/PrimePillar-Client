@@ -2,10 +2,23 @@ import { FaEnvelope, FaUser } from "react-icons/fa";
 import Space from "../../../Components/Space/Space";
 import useAuth from "../../../Hooks/useAuth";
 import useRole from "../../../Hooks/useRole";
+import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../Components/Shared/Loading";
+import moment from "moment";
 
 const MemberProfile = () => {
   const { user } = useAuth();
   const [role] = useRole();
+  const axiosPrivate = useAxiosPrivate();
+  const { data: profile = [], isLoading } = useQuery({
+    queryKey: ["profile"],
+    queryFn: async () => {
+      const { data } = await axiosPrivate(`/agreement/${user?.email}`);
+      return data;
+    },
+  });
+  if (isLoading) return <Loading></Loading>;
   return (
     <div>
       <h1 className="text-center font-bold text-dark-blue text-xl md:text-2xl lg:text-3xl">
@@ -36,23 +49,23 @@ const MemberProfile = () => {
           <h1 className="md:text-xl font-semibold text-white">
             Agr. Accept Date
           </h1>
-          <p className="md:text-lg font-semibold text-white">None</p>
+          <p className="md:text-lg font-semibold text-white">{moment(profile?.acceptDate).format("DD-MM-YYYY")}</p>
         </div>
         <div className="bg-dark-blue p-3 flex flex-col items-center gap-3 rounded-lg">
           <h1 className="md:text-xl font-semibold text-white">Floor</h1>
-          <p className="md:text-lg font-semibold text-white">None</p>
+          <p className="md:text-lg font-semibold text-white">{profile?.floor}</p>
         </div>
         <div className="bg-dark-blue p-3 flex flex-col items-center gap-3 rounded-lg">
           <h1 className="md:text-xl font-semibold text-white">Block</h1>
-          <p className="md:text-lg font-semibold text-white">None</p>
+          <p className="md:text-lg font-semibold text-white">{profile?.block}</p>
         </div>
         <div className="bg-dark-blue p-3 flex flex-col items-center gap-3 rounded-lg">
           <h1 className="md:text-xl font-semibold text-white">Apartment No.</h1>
-          <p className="md:text-lg font-semibold text-white">None</p>
+          <p className="md:text-lg font-semibold text-white">{profile?.apartmentNum}</p>
         </div>
         <div className="bg-dark-blue p-3 flex flex-col items-center gap-3 rounded-lg">
           <h1 className="md:text-xl font-semibold text-white">Rent</h1>
-          <p className="md:text-lg font-semibold text-white">None</p>
+          <p className="md:text-lg font-semibold text-white">$ {profile?.rent}</p>
         </div>
       </div>
     </div>

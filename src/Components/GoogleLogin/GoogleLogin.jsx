@@ -12,10 +12,10 @@ const GoogleLogin = () => {
   const handleGoogleSignIn = async () => {
     try {
       const data = await googleSignIn(googleProvider);
-      await saveUser(data?.user);
-      setUser(data?.user);
       navigate(location?.state ? location.state : "/");
+      setUser(data?.user);
       toast.success("Successfully login with Google");
+      await saveUser(data?.user);
     } catch (err) {
       toast.error("Something went wrong !!");
     }

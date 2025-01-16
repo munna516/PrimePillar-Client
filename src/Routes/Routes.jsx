@@ -19,6 +19,7 @@ import AdminRoute from "./AdminRoute";
 import MemberRoute from "./MemberRoute";
 import UserProfile from "../Pages/Dashboard/User Profile/UserProfile";
 import MemberProfile from "../Pages/Dashboard/Member Profile/MemberProfile";
+import Payment from "../Pages/Dashboard/Make Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -146,6 +147,16 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <UserProfile></UserProfile>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "payment/:month/:rent",
+        element: (
+          <PrivateRoutes>
+            <MemberRoute>
+              <Payment></Payment>
+            </MemberRoute>
           </PrivateRoutes>
         ),
       },
