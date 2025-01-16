@@ -3,16 +3,36 @@ import Space from "../../../Components/Space/Space";
 import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 import Loading from "../../../Components/Shared/Loading";
 import moment from "moment";
+import toast from "react-hot-toast";
 
 const AgreementReq = () => {
   const axiosPrivate = useAxiosPrivate();
-  const { data: agreements = [], isLoading } = useQuery({
+  const {
+    data: agreements = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["agreement"],
     queryFn: async () => {
       const { data } = await axiosPrivate("/agreements");
       return data;
     },
   });
+  const handleAction = async (id, action) => {
+    const message = { id, action };
+    const { data } = await axiosPrivate.post(
+      `/manage-agreement-request`,
+      message
+    );
+    console.log(data);
+    if (data.modifiedCount > 0) {
+      toast.success("Agreement Accepted");
+      refetch();
+    } else {
+      toast.error(data?.message);
+      refetch();
+    }
+  };
   if (isLoading) {
     return <Loading></Loading>;
   }
@@ -55,14 +75,19 @@ const AgreementReq = () => {
                     {moment(agreement.requestDate).format("DD-MM-YYYY")}
                   </td>
                   <td className="border-b-2">
-                    <button className="btn btn-sm bg-dark-blue text-white">
+                    <button
+                      onClick={() => handleAction(agreement._id, "accept")}
+                      className="btn btn-sm bg-dark-blue text-white"
+                    >
                       Accept
                     </button>
                   </td>
                   <td className="border-b-2">
-                    {" "}
-                    <button className="btn btn-sm bg-dark-blue text-white">
-                      Delete
+                    <button
+                      onClick={() => handleAction(agreement._id, "reject")}
+                      className="btn btn-sm bg-red-500 text-white"
+                    >
+                      Reject
                     </button>
                   </td>
                 </tr>
