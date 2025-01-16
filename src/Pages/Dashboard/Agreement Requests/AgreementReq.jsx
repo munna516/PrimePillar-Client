@@ -4,6 +4,7 @@ import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 import Loading from "../../../Components/Shared/Loading";
 import moment from "moment";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const AgreementReq = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -20,17 +21,50 @@ const AgreementReq = () => {
   });
   const handleAction = async (id, action) => {
     const message = { id, action };
-    const { data } = await axiosPrivate.post(
-      `/manage-agreement-request`,
-      message
-    );
-    console.log(data);
-    if (data.modifiedCount > 0) {
-      toast.success("Agreement Accepted");
-      refetch();
+    if (action === "accept") {
+      const { data } = await axiosPrivate.post(
+        `/manage-agreement-request`,
+        message
+      );
+      console.log(data);
+      if (data.modifiedCount > 0) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Agreement Accepted`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch();
+      }
     } else {
-      toast.error(data?.message);
-      refetch();
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Reject it!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          const { data } = await axiosPrivate.post(
+            `/manage-agreement-request`,
+            message
+          );
+          console.log(data);
+          if (data?.message) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `Agreement Rejected`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            refetch();
+          }
+        }
+      });
     }
   };
   if (isLoading) {
@@ -64,7 +98,7 @@ const AgreementReq = () => {
             <tbody>
               {agreements.map((agreement, idx) => (
                 <tr key={agreement._id}>
-                  <th>{idx + 1}</th>
+                  <th className="border-b-2">{idx + 1}</th>
                   <td className="border-b-2">{agreement.name}</td>
                   <td className="border-b-2">{agreement.email}</td>
                   <td className="border-b-2">{agreement.floor}</td>
