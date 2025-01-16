@@ -4,13 +4,14 @@ import Lottie from "lottie-react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState } from "react";
 import GoogleLogin from "../../Components/GoogleLogin/GoogleLogin";
-import { imageUpload } from "../../Api/utils";
+import { imageUpload, saveUser } from "../../Api/utils";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
+import { TbFidgetSpinner } from 'react-icons/tb'
 
 const Register = () => {
-  const { user, setUser, createNewUser, updateUserProfile } = useAuth();
+  const { createNewUser, updateUserProfile, setUser, loading } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -33,20 +34,18 @@ const Register = () => {
     }
     try {
       const result = await createNewUser(email, password);
-      setUser(result?.user);
       const photo = await imageUpload(image);
-      try {
-        await updateUserProfile({
-          displayName: name,
-          photoURL: photo,
-        });
-        toast.success("Registration Successful");
-        navigate("/");
-      } catch (err) {
-        toast.error(err.code, " somthing went wrong");
-      }
+
+      await updateUserProfile({
+        displayName: name,
+        photoURL: photo,
+      });
+      await saveUser({ ...result?.user, displayName: name });
+      setUser(result?.user);
+      navigate("/");
+      toast.success("Registration Successful");
     } catch (error) {
-      toast.error("Email already used in another account", {
+      toast.error(err?.message, {
         position: "top-right",
       });
     }
@@ -158,7 +157,11 @@ const Register = () => {
                   type="submit"
                   className="btn bg-dark-blue hover:bg-dark-blue text-lg w-full text-white"
                 >
-                  Register
+                 {loading ? (
+                <TbFidgetSpinner className='animate-spin m-auto' />
+              ) : (
+                'Register'
+              )}
                 </button>
               </div>
             </form>

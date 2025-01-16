@@ -3,20 +3,22 @@ import useAuth from "../../Hooks/useAuth";
 import { GoogleAuthProvider } from "firebase/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { saveUser } from "../../Api/utils";
 const GoogleLogin = () => {
-  const { googleSignIn } = useAuth();
+  const { googleSignIn, setUser } = useAuth();
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
-  const handleGoogleSignIn = () => {
-    googleSignIn(googleProvider)
-      .then((result) => {
-        toast.success("Successfully login with Google");
-        navigate(location?.state ? location.state : "/");
-      })
-      .catch((error) => {
-        toast.error("Something went wrong !!");
-      });
+  const handleGoogleSignIn = async () => {
+    try {
+      const data = await googleSignIn(googleProvider);
+      await saveUser(data?.user);
+      setUser(data?.user);
+      navigate(location?.state ? location.state : "/");
+      toast.success("Successfully login with Google");
+    } catch (err) {
+      toast.error("Something went wrong !!");
+    }
   };
   return (
     <div>

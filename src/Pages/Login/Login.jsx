@@ -7,9 +7,10 @@ import GoogleLogin from "../../Components/GoogleLogin/GoogleLogin";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const Login = () => {
-  const { userLogin, setUser } = useAuth();
+  const { userLogin, setUser, loading } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const handleLogin = (e) => {
@@ -101,7 +102,11 @@ const Login = () => {
                   type="submit"
                   className="btn bg-dark-blue hover:bg-dark-blue text-lg text-white w-full"
                 >
-                  Login
+                  {loading ? (
+                    <TbFidgetSpinner className="animate-spin m-auto" />
+                  ) : (
+                    "Login"
+                  )}
                 </button>
               </div>
             </form>
