@@ -5,6 +5,7 @@ import Loading from "../../../Components/Shared/Loading";
 import moment from "moment";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
+import NoData from "../../../Components/Shared/NoData";
 
 const AgreementReq = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -79,55 +80,59 @@ const AgreementReq = () => {
       <Space></Space>
       <div>
         <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead className="border-b-2">
-              <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Eamil</th>
-                <th>Floor</th>
-                <th>Block</th>
-                <th>Apt No.</th>
-                <th>Rent</th>
-                <th>Req Date</th>
-                <th>Accept</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {agreements.map((agreement, idx) => (
-                <tr key={agreement._id}>
-                  <th className="border-b-2">{idx + 1}</th>
-                  <td className="border-b-2">{agreement.name}</td>
-                  <td className="border-b-2">{agreement.email}</td>
-                  <td className="border-b-2">{agreement.floor}</td>
-                  <td className="border-b-2">{agreement.block}</td>
-                  <td className="border-b-2">{agreement.apartmentNum}</td>
-                  <td className="border-b-2">${agreement.rent}</td>
-                  <td className="border-b-2">
-                    {moment(agreement.requestDate).format("DD-MM-YYYY")}
-                  </td>
-                  <td className="border-b-2">
-                    <button
-                      onClick={() => handleAction(agreement._id, "accept")}
-                      className="btn btn-sm bg-dark-blue text-white"
-                    >
-                      Accept
-                    </button>
-                  </td>
-                  <td className="border-b-2">
-                    <button
-                      onClick={() => handleAction(agreement._id, "reject")}
-                      className="btn btn-sm bg-red-500 text-white"
-                    >
-                      Reject
-                    </button>
-                  </td>
+          {agreements.length > 0 ? (
+            <table className="table">
+              {/* head */}
+              <thead className="border-b-2">
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Eamil</th>
+                  <th>Floor</th>
+                  <th>Block</th>
+                  <th>Apt No.</th>
+                  <th>Rent</th>
+                  <th>Req Date</th>
+                  <th>Accept</th>
+                  <th>Delete</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {agreements.map((agreement, idx) => (
+                  <tr key={agreement._id}>
+                    <th className="border-b-2">{idx + 1}</th>
+                    <td className="border-b-2">{agreement.name}</td>
+                    <td className="border-b-2">{agreement.email}</td>
+                    <td className="border-b-2">{agreement.floor}</td>
+                    <td className="border-b-2">{agreement.block}</td>
+                    <td className="border-b-2">{agreement.apartmentNum}</td>
+                    <td className="border-b-2">${agreement.rent}</td>
+                    <td className="border-b-2">
+                      {moment(agreement.requestDate).format("DD-MM-YYYY")}
+                    </td>
+                    <td className="border-b-2">
+                      <button
+                        onClick={() => handleAction(agreement._id, "accept")}
+                        className="btn btn-sm bg-dark-blue text-white"
+                      >
+                        Accept
+                      </button>
+                    </td>
+                    <td className="border-b-2">
+                      <button
+                        onClick={() => handleAction(agreement._id, "reject")}
+                        className="btn btn-sm bg-red-500 text-white"
+                      >
+                        Reject
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <NoData text={"Agreement Request"}></NoData>
+          )}
         </div>
       </div>
     </div>

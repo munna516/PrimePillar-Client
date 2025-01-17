@@ -5,9 +5,10 @@ import useAuth from "../../../Hooks/useAuth";
 import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import { TbFidgetSpinner } from "react-icons/tb";
 
 const CheckoutForm = ({ month, rent }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const [clientSecret, setClientSecret] = useState("");
@@ -63,6 +64,8 @@ const CheckoutForm = ({ month, rent }) => {
         name: user.displayName,
         transactionId: paymentIntent?.id,
         month: monthName,
+        amount: rent,
+        paymentDate: new Date(),
       };
       console.log(paymentInfo);
       try {
@@ -102,7 +105,11 @@ const CheckoutForm = ({ month, rent }) => {
         type="submit"
         disabled={!stripe || !clientSecret}
       >
-        Pay
+        {loading ? (
+          <TbFidgetSpinner className="animate-spin m-auto" />
+        ) : (
+          "Pay"
+        )}
       </button>
     </form>
   );
