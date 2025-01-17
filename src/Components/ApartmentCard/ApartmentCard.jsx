@@ -6,14 +6,18 @@ const ApartmentCard = ({ apartment }) => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { apartmentImg, block, floor, rent, apartmentNum } = apartment || {};
+  const { apartmentImg, block, floor, rent, apartmentNum, status, _id } =
+    apartment || {};
   const handleAgreement = () => {
     if (!user && !user?.email) return navigate("/login");
+    if (status === "unavailable") {
+      return toast.error("Apartment is not available now");
+    }
 
     const agreementInfo = {
       name: user?.displayName,
       email: user?.email,
-
+      apartmentId: _id,
       floor,
       block,
       apartmentNum,
@@ -26,9 +30,7 @@ const ApartmentCard = ({ apartment }) => {
           "Agreement is successful.Please wait for owner confirmation!!"
         );
       } else {
-        toast.error(res?.data?.message, {
-          position: "top-right",
-        });
+        toast.error(res?.data?.message);
       }
     });
   };
@@ -50,13 +52,26 @@ const ApartmentCard = ({ apartment }) => {
         <h2 className="md:text-lg">
           Price : <span className="font-bold">${rent}</span>
         </h2>
-        <div className="card-actions justify-end">
-          <Link
-            onClick={handleAgreement}
-            className="p-4 border-2 font-semibold border-dark-blue bg-dark-blue rounded-lg hover:text-black hover:bg-white  text-white"
-          >
-            Agreement
-          </Link>
+        <div className="flex items-center">
+          <p>
+            <span
+              className={`rounded-full px-3 py-1 ${
+                status === "available"
+                  ? "bg-green-400 text-white"
+                  : "bg-gray-500 text-white"
+              } `}
+            >
+              {status}
+            </span>
+          </p>
+          <div className="card-actions justify-end">
+            <Link
+              onClick={handleAgreement}
+              className={`p-3 border-2 font-semibold border-dark-blue bg-dark-blue rounded-lg hover:text-black hover:bg-white  text-white`}
+            >
+              Agreement
+            </Link>
+          </div>
         </div>
       </div>
     </div>

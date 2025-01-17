@@ -20,8 +20,8 @@ const AgreementReq = () => {
       return data;
     },
   });
-  const handleAction = async (id, action) => {
-    const message = { id, action };
+  const handleAction = async (id, apartmentId, action) => {
+    const message = { id, action, apartmentId };
     if (action === "accept") {
       const { data } = await axiosPrivate.post(
         `/manage-agreement-request`,
@@ -112,7 +112,13 @@ const AgreementReq = () => {
                     </td>
                     <td className="border-b-2">
                       <button
-                        onClick={() => handleAction(agreement._id, "accept")}
+                        onClick={() =>
+                          handleAction(
+                            agreement._id,
+                            agreement.apartmentId,
+                            "accept"
+                          )
+                        }
                         className="btn btn-sm bg-dark-blue text-white"
                       >
                         Accept
@@ -120,7 +126,13 @@ const AgreementReq = () => {
                     </td>
                     <td className="border-b-2">
                       <button
-                        onClick={() => handleAction(agreement._id, "reject")}
+                        onClick={() =>
+                          handleAction(
+                            agreement._id,
+                            agreement.apartmentId,
+                            "reject"
+                          )
+                        }
                         className="btn btn-sm bg-red-500 text-white"
                       >
                         Reject
