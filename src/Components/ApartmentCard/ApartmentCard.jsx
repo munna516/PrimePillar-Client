@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosPrivate from "../../Hooks/useAxiosPrivate";
 const ApartmentCard = ({ apartment }) => {
-  const axiosPublic = useAxiosPublic();
+  const axiosPrivate = useAxiosPrivate()
   const { user } = useAuth();
   const navigate = useNavigate();
   const { apartmentImg, block, floor, rent, apartmentNum, status, _id } =
@@ -24,7 +24,7 @@ const ApartmentCard = ({ apartment }) => {
       rent,
       status: "Pending",
     };
-    axiosPublic.post(`/agreements`, agreementInfo).then((res) => {
+    axiosPrivate.post(`/agreements`, agreementInfo).then((res) => {
       if (res?.data?.insertedId) {
         toast.success(
           "Agreement is successful.Please wait for owner confirmation!!"

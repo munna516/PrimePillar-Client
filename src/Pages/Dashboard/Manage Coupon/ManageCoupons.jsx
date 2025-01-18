@@ -4,6 +4,7 @@ import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 import CouponDialog from "./CouponDialog";
 import NoData from "../../../Components/Shared/NoData";
 import Loading from "../../../Components/Shared/Loading";
+import Swal from "sweetalert2";
 
 const ManageCoupons = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -18,6 +19,31 @@ const ManageCoupons = () => {
       return data;
     },
   });
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { data } = await axiosPrivate(`/delete-coupon/${id}`);
+        if (data?.deletedCount > 0) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `Coupon Deleted`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          refetch();
+        }
+      }
+    });
+  };
   if (isLoading) return <Loading></Loading>;
   return (
     <div>
@@ -39,6 +65,7 @@ const ManageCoupons = () => {
                 <th>Code</th>
                 <th>Discount Percentage</th>
                 <th>Description</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -48,6 +75,14 @@ const ManageCoupons = () => {
                   <td className="border-b-2">{coupon.code}</td>
                   <td className="border-b-2">{coupon.discount}%</td>
                   <td className="border-b-2">{coupon.description}</td>
+                  <td className="border-b-2">
+                    <button
+                      onClick={() => handleDelete(coupon._id)}
+                      className="btn btn-sm bg-red-500 text-white hover:bg-red-500"
+                    >
+                      Remove
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

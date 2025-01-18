@@ -74,7 +74,7 @@ const ManageMembers = () => {
                   <td>
                     <button
                       onClick={() => handleRemove(member.email, member.name)}
-                      className="btn btn-sm bg-red-500 text-white"
+                      className="btn btn-sm bg-red-500 text-white hover:bg-red-500"
                     >
                       Remove
                     </button>
