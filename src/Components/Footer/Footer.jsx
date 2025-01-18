@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../../assets/Images/logo.png"
+import logo from "../../assets/Images/logo.png";
 const Footer = () => {
   return (
     <>
@@ -16,7 +16,7 @@ const Footer = () => {
         <nav>
           <div className="grid grid-flow-col gap-4 text-lg">
             <a
-              // href="https://x.com/munna_516"
+              href="https://x.com/munna_516"
               className="text-white"
               target="_blank"
             >
@@ -31,7 +31,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              // href="https://www.youtube.com/"
+              href="https://www.youtube.com/"
               className="text-white"
               target="_blank"
             >
@@ -46,7 +46,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              // href="https://www.facebook.com/mehedi.hasan.munna.5161/"
+              href="https://www.facebook.com/mehedi.hasan.munna.5161/"
               target="_blank"
               className="text-white"
             >
@@ -65,7 +65,7 @@ const Footer = () => {
         <aside>
           <p className="text-white text-lg">
             Copyright © {new Date().getFullYear()} - All right reserved by
-            HelpHive
+            PrimePillar
           </p>
         </aside>
       </footer>

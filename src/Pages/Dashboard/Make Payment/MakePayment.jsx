@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Components/Shared/Loading";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const MakePayment = () => {
   const navigate = useNavigate();
@@ -30,6 +31,9 @@ const MakePayment = () => {
   if (isLoading) return <Loading></Loading>;
   return (
     <div>
+      <Helmet>
+        <title>Member Dashboard | Payment</title>
+      </Helmet>
       <h1 className="text-center font-bold text-dark-blue text-xl md:text-2xl lg:text-3xl">
         Make Payment
       </h1>

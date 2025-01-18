@@ -6,6 +6,7 @@ import moment from "moment";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import NoData from "../../../Components/Shared/NoData";
+import { Helmet } from "react-helmet";
 
 const AgreementReq = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -74,6 +75,9 @@ const AgreementReq = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin Dashboard | Agreement Request</title>
+      </Helmet>
       <h1 className="text-center font-bold text-dark-blue text-xl md:text-2xl lg:text-3xl">
         Agreements Requests
       </h1>

@@ -3,6 +3,7 @@ import Space from "../../../Components/Space/Space";
 import Button from "../../../Components/Shared/Button";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const MakeAnnouncement = () => {
   const axiosPublic = useAxiosPublic();
@@ -26,6 +27,9 @@ const MakeAnnouncement = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Admin Dashboard | Make Announcement</title>
+      </Helmet>
       <h1 className="text-center font-bold text-xl text-dark-blue md:text-2xl lg:text-3xl">
         Make An Announcement
       </h1>

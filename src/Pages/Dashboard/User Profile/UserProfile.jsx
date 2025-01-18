@@ -5,9 +5,12 @@ import useRole from "../../../Hooks/useRole";
 
 const UserProfile = () => {
   const { user } = useAuth();
-  const [role]= useRole()
+  const [role] = useRole();
   return (
     <div>
+      <Helmet>
+        <title>User Dashboard | Profile</title>
+      </Helmet>
       <h1 className="text-center font-bold text-dark-blue text-xl md:text-2xl lg:text-3xl">
         My-Profile
       </h1>

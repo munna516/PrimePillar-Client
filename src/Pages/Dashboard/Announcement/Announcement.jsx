@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import Loading from "../../../Components/Shared/Loading";
 import Space from "../../../Components/Space/Space";
+import { Helmet } from "react-helmet";
 
 const Announcement = () => {
   const axiosPublic = useAxiosPublic();
@@ -15,6 +16,9 @@ const Announcement = () => {
   if (isLoading) return <Loading></Loading>;
   return (
     <div>
+      <Helmet>
+        <title>Dashboard | Announcement</title>
+      </Helmet>
       <h1 className="text-center font-bold text-dark-blue text-xl md:text-2xl lg:text-3xl">
         All Announcements
       </h1>

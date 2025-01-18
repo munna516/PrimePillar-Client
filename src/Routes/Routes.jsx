@@ -20,6 +20,8 @@ import MemberRoute from "./MemberRoute";
 import UserProfile from "../Pages/Dashboard/User Profile/UserProfile";
 import MemberProfile from "../Pages/Dashboard/Member Profile/MemberProfile";
 import Payment from "../Pages/Dashboard/Make Payment/Payment";
+import TermsCondition from "../Components/Terms & Conditions/TermsCondition";
+import Contact from "../Components/Contact/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,14 @@ export const router = createBrowserRouter([
       {
         path: "/apartment",
         element: <Apartment></Apartment>,
+      },
+      {
+        path: "/terms-condition",
+        element: <TermsCondition></TermsCondition>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
     ],
   },

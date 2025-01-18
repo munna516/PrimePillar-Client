@@ -5,6 +5,7 @@ import useAuth from "../../../Hooks/useAuth";
 import Loading from "../../../Components/Shared/Loading";
 import NoData from "../../../Components/Shared/NoData";
 import moment from "moment";
+import { Helmet } from "react-helmet";
 
 const PaymentHistory = () => {
   const { user } = useAuth();
@@ -19,6 +20,9 @@ const PaymentHistory = () => {
   if (isLoading) return <Loading></Loading>;
   return (
     <div>
+      <Helmet>
+        <title>Member Dashboard | Payment History</title>
+      </Helmet>
       <h1 className="text-center font-bold text-dark-blue text-xl md:text-2xl lg:text-3xl">
         Payment History
       </h1>

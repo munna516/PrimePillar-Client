@@ -5,6 +5,7 @@ import Space from "../../../Components/Space/Space";
 import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const ManageMembers = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -49,6 +50,9 @@ const ManageMembers = () => {
   if (isLoading) return <Loading></Loading>;
   return (
     <div>
+       <Helmet>
+        <title>Admin Dashboard | Manage Members</title>
+      </Helmet>
       <h1 className="text-center font-bold text-dark-blue text-xl md:text-2xl lg:text-3xl">
         Manage Members
       </h1>

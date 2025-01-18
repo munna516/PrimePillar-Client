@@ -3,7 +3,7 @@ import Banner from "../../Components/Banner/Banner";
 import AboutBuilding from "../../Components/AboutBuilding/AboutBuilding";
 import Coupons from "../../Components/Coupons/Coupons";
 import Space from "../../Components/Space/Space";
-
+import LocationDetails from "../../Components/Location Details/LocationDetails";
 
 const Home = () => {
   return (
@@ -15,9 +15,11 @@ const Home = () => {
         <Banner></Banner>
         <AboutBuilding></AboutBuilding>
         <Coupons></Coupons>
-        {/* <LocationDetails></LocationDetails> */}
+        <LocationDetails></LocationDetails>
       </div>
-      <Space></Space>
+      <div className="mb-10 md:mb-14 lg:mb-20">
+
+      </div>
     </>
   );
 };

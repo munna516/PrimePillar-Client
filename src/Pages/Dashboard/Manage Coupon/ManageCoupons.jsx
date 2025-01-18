@@ -5,6 +5,7 @@ import CouponDialog from "./CouponDialog";
 import NoData from "../../../Components/Shared/NoData";
 import Loading from "../../../Components/Shared/Loading";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet";
 
 const ManageCoupons = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -47,6 +48,9 @@ const ManageCoupons = () => {
   if (isLoading) return <Loading></Loading>;
   return (
     <div>
+      <Helmet>
+        <title>Admin Dashboard | Manage Coupons</title>
+      </Helmet>
       <div className="flex justify-around items-center">
         <div></div>
         <h1 className="text-center font-bold text-dark-blue text-xl md:text-2xl lg:text-3xl">

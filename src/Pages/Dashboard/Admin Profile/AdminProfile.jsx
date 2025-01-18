@@ -5,6 +5,7 @@ import useRole from "../../../Hooks/useRole";
 import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../../Components/Shared/Loading";
+import { Helmet } from "react-helmet";
 
 const AdminProfile = () => {
   const { user } = useAuth();
@@ -26,6 +27,9 @@ const AdminProfile = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Admin Dashboard | Profile</title>
+      </Helmet>
       <h1 className="text-center font-bold text-dark-blue text-xl md:text-2xl lg:text-3xl">
         Admin Profile
       </h1>
