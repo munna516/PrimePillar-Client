@@ -71,7 +71,7 @@ const ManageMembers = () => {
                   <th className="border-b-2">{idx + 1}</th>
                   <td className="border-b-2">{member.name}</td>
                   <td className="border-b-2">{member.email}</td>
-                  <td>
+                  <td className="border-b-2">
                     <button
                       onClick={() => handleRemove(member.email, member.name)}
                       className="btn btn-sm bg-red-500 text-white hover:bg-red-500"

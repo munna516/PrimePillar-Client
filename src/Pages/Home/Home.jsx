@@ -4,6 +4,7 @@ import AboutBuilding from "../../Components/AboutBuilding/AboutBuilding";
 import Coupons from "../../Components/Coupons/Coupons";
 import Space from "../../Components/Space/Space";
 
+
 const Home = () => {
   return (
     <>
@@ -12,8 +13,9 @@ const Home = () => {
       </Helmet>
       <div className="space-y-20">
         <Banner></Banner>
-        <Coupons></Coupons>
         <AboutBuilding></AboutBuilding>
+        <Coupons></Coupons>
+        {/* <LocationDetails></LocationDetails> */}
       </div>
       <Space></Space>
     </>
