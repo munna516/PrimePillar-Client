@@ -6,17 +6,19 @@ import NoData from "../../../Components/Shared/NoData";
 import Loading from "../../../Components/Shared/Loading";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const ManageCoupons = () => {
   const axiosPrivate = useAxiosPrivate();
+  const axiosPublic = useAxiosPublic();
   const {
     data: coupons = [],
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["coupons"],
+    queryKey: ["coupons-all"],
     queryFn: async () => {
-      const { data } = await axiosPrivate("/coupons");
+      const { data } = await axiosPublic("/all-coupons");
       return data;
     },
   });

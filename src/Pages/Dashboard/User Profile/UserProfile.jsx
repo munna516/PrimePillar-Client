@@ -2,6 +2,7 @@ import { FaEnvelope, FaUser } from "react-icons/fa";
 import Space from "../../../Components/Space/Space";
 import useAuth from "../../../Hooks/useAuth";
 import useRole from "../../../Hooks/useRole";
+import { Helmet } from "react-helmet";
 
 const UserProfile = () => {
   const { user } = useAuth();

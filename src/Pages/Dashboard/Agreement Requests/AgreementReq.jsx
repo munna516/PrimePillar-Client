@@ -28,7 +28,6 @@ const AgreementReq = () => {
         `/manage-agreement-request`,
         message
       );
-      console.log(data);
       if (data.modifiedCount > 0) {
         Swal.fire({
           position: "center",
@@ -54,7 +53,7 @@ const AgreementReq = () => {
             `/manage-agreement-request`,
             message
           );
-          console.log(data);
+
           if (data?.message) {
             Swal.fire({
               position: "center",

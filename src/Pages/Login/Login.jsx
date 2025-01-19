@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import loginLottie from "../../assets/LottieFiles/LoginLottie.json";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -9,9 +9,11 @@ import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
 import { TbFidgetSpinner } from "react-icons/tb";
 
+
 const Login = () => {
   const { userLogin, setUser, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
   const handleLogin = (e) => {
     e.preventDefault();

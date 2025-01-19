@@ -40,7 +40,6 @@ const CheckoutForm = ({ month, rent }) => {
     if (error) {
       toast.error(error?.message);
     } else {
-      console.log("payment method", paymentMethod);
     }
 
     // Confirm payment
@@ -67,7 +66,6 @@ const CheckoutForm = ({ month, rent }) => {
         amount: rent,
         paymentDate: new Date(),
       };
-      console.log(paymentInfo);
       try {
         const { data } = await axiosPrivate.post("/payments", paymentInfo);
         if (data?.insertedId) {

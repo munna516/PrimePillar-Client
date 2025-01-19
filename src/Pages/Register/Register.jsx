@@ -8,10 +8,11 @@ import { imageUpload, saveUser } from "../../Api/utils";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
-import { TbFidgetSpinner } from 'react-icons/tb'
+import { TbFidgetSpinner } from "react-icons/tb";
+import Loading from "../../Components/Shared/Loading";
 
 const Register = () => {
-  const { createNewUser, updateUserProfile, setUser, loading } = useAuth();
+  const { createNewUser, updateUserProfile, loading } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -40,10 +41,9 @@ const Register = () => {
         displayName: name,
         photoURL: photo,
       });
-      await saveUser({ ...result?.user, displayName: name });
-      setUser(result?.user);
       navigate("/");
       toast.success("Registration Successful");
+      await saveUser({ ...result?.user, displayName: name });
     } catch (error) {
       toast.error(err?.message, {
         position: "top-right",
@@ -157,11 +157,11 @@ const Register = () => {
                   type="submit"
                   className="btn bg-dark-blue hover:bg-dark-blue text-lg w-full text-white"
                 >
-                 {loading ? (
-                <TbFidgetSpinner className='animate-spin m-auto' />
-              ) : (
-                'Register'
-              )}
+                  {loading ? (
+                    <TbFidgetSpinner className="animate-spin m-auto" />
+                  ) : (
+                    "Register"
+                  )}
                 </button>
               </div>
             </form>

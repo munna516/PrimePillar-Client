@@ -1,10 +1,9 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "./useAuth";
-import toast from "react-hot-toast";
 
 const axiosPrivate = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://prime-pillar-server.vercel.app",
 });
 
 const useAxiosPrivate = () => {

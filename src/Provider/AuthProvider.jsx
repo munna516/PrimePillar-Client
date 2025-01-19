@@ -9,6 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import useAxiosPublic from "../Hooks/useAxiosPublic";
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
@@ -36,7 +37,6 @@ const AuthProvider = ({ children }) => {
 
   //   Update User Profile
   const updateUserProfile = (updatedData) => {
-    setLoading(true);
     return updateProfile(auth.currentUser, updatedData);
   };
 
@@ -49,14 +49,21 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      if (currentUser) {
+      if (currentUser?.email) {
         const userInfo = { email: currentUser?.email };
-        axiosPublic.post("/jwt", userInfo).then((res) => {
-          if (res?.data?.token) {
-            localStorage.setItem("token", res.data.token);
+        axiosPublic
+          .post("/jwt", userInfo)
+          .then((res) => {
+            if (res?.data?.token) {
+              localStorage.setItem("token", res.data.token);
+            }
+          })
+          .catch((err) => {
+            toast.err("Error on fetching token");
+          })
+          .finally(() => {
             setLoading(false);
-          }
-        });
+          });
       } else {
         localStorage.removeItem("token");
         setLoading(false);

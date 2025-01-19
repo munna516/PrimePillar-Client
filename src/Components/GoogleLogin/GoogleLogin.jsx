@@ -4,20 +4,21 @@ import { GoogleAuthProvider } from "firebase/auth";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { saveUser } from "../../Api/utils";
+
 const GoogleLogin = () => {
-  const { googleSignIn, setUser } = useAuth();
+  const { googleSignIn } = useAuth();
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
   const location = useLocation();
   const handleGoogleSignIn = async () => {
     try {
       const data = await googleSignIn(googleProvider);
+
       navigate(location?.state ? location.state : "/");
-      setUser(data?.user);
       toast.success("Successfully login with Google");
       await saveUser(data?.user);
     } catch (err) {
-      toast.error("Something went wrong !!");
+      // toast.error("Something went wrong !!");
     }
   };
   return (
