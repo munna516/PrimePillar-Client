@@ -1,12 +1,13 @@
 import { format } from "date-fns";
 import Space from "../../../Components/Space/Space";
 import Button from "../../../Components/Shared/Button";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet";
+import useAxiosPrivate from "../../../Hooks/useAxiosPrivate";
 
 const MakeAnnouncement = () => {
-  const axiosPublic = useAxiosPublic();
+  // const axiosPublic = useAxiosPublic();
+  const axiosPrivate = useAxiosPrivate();
   const handleSubmit = (e) => {
     e.preventDefault();
     const title = e.target.title.value;
@@ -18,7 +19,7 @@ const MakeAnnouncement = () => {
       description,
       date,
     };
-    axiosPublic.post("/announcements", announcement).then((res) => {
+    axiosPrivate.post("/announcements", announcement).then((res) => {
       if (res?.data.acknowledged) {
         toast.success("Announcement Posted Successfully");
         e.target.reset();
