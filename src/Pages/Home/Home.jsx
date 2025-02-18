@@ -7,6 +7,7 @@ import LocationDetails from "../../Components/Location Details/LocationDetails";
 import NewsLetter from "../../Components/NewsLetter/NewsLetter";
 import FeaturedApartment from "../../Components/Featured Apartment/FeaturedApartment";
 import Blogs from "../../Components/Blogs/Blogs";
+import Reviews from "../../Components/Reviews/Reviews";
 
 const Home = () => {
   return (
@@ -20,6 +21,7 @@ const Home = () => {
         <Coupons></Coupons>
         <AboutBuilding></AboutBuilding>
         <Blogs></Blogs>
+        <Reviews></Reviews>
         <LocationDetails></LocationDetails>
         <NewsLetter></NewsLetter>
       </div>
