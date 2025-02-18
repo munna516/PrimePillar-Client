@@ -41,7 +41,7 @@ const LocationDetails = () => {
           </GoogleMapReact>
         </div>
 
-        <div className="text-gray-800 space-y-4">
+        <div className=" space-y-4 ">
           <h3 className="text-2xl font-bold text-dark-blue">How to Get Here</h3>
           <p className="text-lg">
             Our building is located at{" "}

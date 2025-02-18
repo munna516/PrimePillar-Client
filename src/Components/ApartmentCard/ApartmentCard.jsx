@@ -67,7 +67,7 @@ const ApartmentCard = ({ apartment }) => {
           <div className="card-actions justify-end">
             <Link
               onClick={handleAgreement}
-              className={`p-3 border-2 font-semibold border-dark-blue bg-dark-blue rounded-lg hover:text-black hover:bg-white  text-white`}
+              className={`p-3 border-2 font-semibold  border-dark-blue bg-white rounded-lg   text-dark-blue hover:bg-dark-blue hover:text-white`}
             >
               Agreement
             </Link>

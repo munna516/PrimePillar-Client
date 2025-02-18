@@ -1,9 +1,11 @@
+import Space from "../Space/Space";
+
 const AboutBuilding = () => {
   return (
     <div>
-  
+
       <div
-        className="rounded-xl bg-cover bg-no-repeat bg-center"
+        className="rounded-xl bg-cover bg-no-repeat bg-center mt-24"
         style={{
           backgroundImage: `url('/Image/building.jpg')`, // Replace with the correct path
         }}
