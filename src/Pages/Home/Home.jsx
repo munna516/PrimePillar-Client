@@ -6,6 +6,7 @@ import Space from "../../Components/Space/Space";
 import LocationDetails from "../../Components/Location Details/LocationDetails";
 import NewsLetter from "../../Components/NewsLetter/NewsLetter";
 import FeaturedApartment from "../../Components/Featured Apartment/FeaturedApartment";
+import Blogs from "../../Components/Blogs/Blogs";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
         <FeaturedApartment></FeaturedApartment>
         <Coupons></Coupons>
         <AboutBuilding></AboutBuilding>
+        <Blogs></Blogs>
         <LocationDetails></LocationDetails>
         <NewsLetter></NewsLetter>
       </div>
