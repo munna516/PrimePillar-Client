@@ -18,7 +18,7 @@ const GoogleLogin = () => {
       toast.success("Successfully login with Google");
       await saveUser(data?.user);
     } catch (err) {
-      // toast.error("Something went wrong !!");
+     
     }
   };
   return (
