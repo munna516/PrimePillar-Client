@@ -49,7 +49,7 @@ const Apartment = () => {
   };
 
   if (isLoading) {
-    return <Loading />;
+     return <Loading />;
   }
 
   return (

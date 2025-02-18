@@ -52,6 +52,26 @@ const Navbar = () => {
       >
         <a>Apartment</a>
       </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          `button md:text-lg lg:text-xl ${
+            isActive ? "text-dark-gray bg-white" : ""
+          }`
+        }
+        to="/terms-condition"
+      >
+        <a>Terms Conditions</a>
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          `button md:text-lg lg:text-xl ${
+            isActive ? "text-dark-gray bg-white" : ""
+          }`
+        }
+        to="/contact"
+      >
+        <a>Contact</a>
+      </NavLink>
     </>
   );
   if(isLoading) return <Loading></Loading>

@@ -1,6 +1,7 @@
 import React from "react";
 import toast from "react-hot-toast";
 import Space from "../Space/Space";
+import { Helmet } from "react-helmet";
 
 const Contact = () => {
   const handleMessage = (e) => {
@@ -12,7 +13,10 @@ const Contact = () => {
     toast.success("Message Sent");
     form.reset();
   };
-  return (
+  return <>
+  <Helmet>
+    <title>PrimePillar | Contact</title>
+  </Helmet>
     <div>
       <div>
         <h1 className="text-2xl md:text-4xl font-bold text-dark-blue text-center mt-32">
@@ -75,7 +79,7 @@ const Contact = () => {
         <Space></Space>
       </div>
     </div>
-  );
+  </>
 };
 
 export default Contact;

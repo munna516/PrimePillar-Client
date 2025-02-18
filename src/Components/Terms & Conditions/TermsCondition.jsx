@@ -1,7 +1,11 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const TermsCondition = () => {
-  return (
+  return <>
+  <Helmet>
+    <title>PrimePillar | Terms & Conditions</title>
+  </Helmet>
     <div className="flex flex-col items-center p-6 min-h-screen text-lg">
       <div className="w-full max-w-4xl rounded-lg p-8">
         <h1 className="text-xl md:text-2xl lg:text-4xl font-bold mb-6 text-center text-primary">
@@ -133,7 +137,7 @@ const TermsCondition = () => {
         </section>
       </div>
     </div>
-  );
+  </>
 };
 
 export default TermsCondition;
