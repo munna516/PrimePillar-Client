@@ -5,6 +5,7 @@ import Coupons from "../../Components/Coupons/Coupons";
 import Space from "../../Components/Space/Space";
 import LocationDetails from "../../Components/Location Details/LocationDetails";
 import NewsLetter from "../../Components/NewsLetter/NewsLetter";
+import FeaturedApartment from "../../Components/Featured Apartment/FeaturedApartment";
 
 const Home = () => {
   return (
@@ -14,8 +15,10 @@ const Home = () => {
       </Helmet>
       <div className="space-y-20">
         <Banner></Banner>
-        <AboutBuilding></AboutBuilding>
+        <FeaturedApartment></FeaturedApartment>
         <Coupons></Coupons>
+        <AboutBuilding></AboutBuilding>
+        
         <LocationDetails></LocationDetails>
         <NewsLetter></NewsLetter>
       </div>
